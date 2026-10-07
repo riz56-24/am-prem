@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alight Motion Premium — RIIZZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --gold: #d4af37;
+    --gold-light: #f4e4a8;
+    --gold-dark: #a17f1e;
+    --bg-deep: #0a0a0f;
+    --bg-mid: #12121a;
+    --bg-soft: #1a1a24;
+    --text-primary: #f5f5f0;
+    --text-secondary: #a8a8b0;
+    --text-muted: #6b6b78;
+    --border-gold: rgba(212, 175, 55, 0.25);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --success: #4ade80;
+    --error: #f87171;
+    --info: #93c5fd;
+    --warn: #fbbf24;
+  }
+
+  html, body {
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  /* ==== BACKGROUND ORNAMENT ==== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.08), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.06), transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(120, 100, 200, 0.05), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  /* ==== CARD ==== */
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    background: linear-gradient(160deg, rgba(26, 26, 36, 0.85), rgba(10, 10, 15, 0.95));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-gold);
+    border-radius: 20px;
+    padding: 44px 40px 36px;
+    box-shadow:
+      0 0 0 1px rgba(212, 175, 55, 0.05),
+      0 30px 80px rgba(0, 0, 0, 0.7),
+      0 0 60px rgba(212, 175, 55, 0.05) inset;
+    animation: cardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Corner ornaments */
+  .card::before,
+  .card::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--gold);
+    opacity: 0.5;
+  }
+
+  .card::before {
+    top: 14px;
+    left: 14px;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 12px;
+  }
+
+  .card::after {
+    bottom: 14px;
+    right: 14px;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 12px;
+  }
+
+  /* ==== HEADER ==== */
+  .header {
+    text-align: center;
+    padding-bottom: 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '◆';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 8px;
+    background: var(--bg-mid);
+    padding: 0 12px 0 20px;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+  }
+
+  .logo-mark {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 18px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-mark::before,
+  .logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+  }
+
+  .logo-mark::before {
+    animation: rotateSlow 12s linear infinite;
+  }
+
+  .logo-mark::after {
+    inset: 8px;
+    border-color: rgba(212, 175, 55, 0.4);
+    animation: rotateSlow 8s linear infinite reverse;
+  }
+
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .logo-mark .diamond {
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    transform: rotate(45deg);
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+    50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.9); }
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .creator {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 5px 14px;
+    border: 1px solid var(--border-gold);
+    border-radius: 20px;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ==== STEP INDICATOR ==== */
+  .steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 30px;
+  }
+
+  .step-node {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1.5px solid var(--border-subtle);
+    color: var(--text-muted);
+    background: var(--bg-soft);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .step-circle.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    transform: scale(1.05);
+  }
+
+  .step-circle.done {
+    border-color: var(--success);
+    background: rgba(74, 222, 128, 0.1);
+    color: var(--success);
+  }
+
+  .step-line {
+    width: 40px;
+    height: 1px;
+    background: var(--border-subtle);
+    transition: background 0.4s ease;
+  }
+
+  .step-line.done {
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+
+  /* ==== FORM ==== */
+  .section {
+    display: none;
+    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .section.show { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .section-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-bottom: 22px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(10, 10, 15, 0.8);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    outline: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 78px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-color: var(--gold);
+    background: rgba(10, 10, 15, 0.95);
+    box-shadow:
+      0 0 0 3px rgba(212, 175, 55, 0.08),
+      0 0 20px rgba(212, 175, 55, 0.15);
+  }
+
+  .field input[readonly] {
+    background: rgba(74, 222, 128, 0.05);
+    border-color: rgba(74, 222, 128, 0.3);
+    color: var(--success);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+  }
+
+  /* ==== BUTTONS ==== */
+  .btn {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-light) 100%);
+    background-size: 200% 100%;
+    color: #1a1a10;
+    box-shadow:
+      0 8px 24px rgba(212, 175, 55, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .btn-primary:hover:not(:disabled)::before {
+    left: 100%;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-position: 100% 0;
+    transform: translateY(-2px);
+    box-shadow:
+      0 14px 32px rgba(212, 175, 55, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    margin-top: 10px;
+    font-size: 11px;
+    padding: 12px;
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.05);
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #1a1a10;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ==== STATUS ==== */
+  .status {
+    display: none;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    margin-top: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    padding-left: 42px;
+  }
+
+  .status::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+
+  .status.show { display: block; }
+
+  .status.success {
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    color: #86efac;
+  }
+  .status.success::before { background: var(--success); box-shadow: 0 0 12px var(--success); }
+
+  .status.error {
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.25);
+    color: #fca5a5;
+  }
+  .status.error::before { background: var(--error); box-shadow: 0 0 12px var(--error); }
+
+  .status.info {
+    background: rgba(147, 197, 253, 0.08);
+    border: 1px solid rgba(147, 197, 253, 0.25);
+    color: #bfdbfe;
+  }
+  .status.info::before { background: var(--info); box-shadow: 0 0 12px var(--info); }
+
+  .status.warn {
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    color: #fde68a;
+  }
+  .status.warn::before { background: var(--warn); box-shadow: 0 0 12px var(--warn); }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ==== CONSOLE ==== */
+  .console {
+    margin-top: 22px;
+    background: #050508;
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .console-header {
+    background: linear-gradient(180deg, #12121a, #0d0d14);
+    padding: 10px 16px;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .console-header .dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .console-header .dots span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+  .console-header .dots .d1 { background: #ff5f56; }
+  .console-header .dots .d2 { background: #ffbd2e; }
+  .console-header .dots .d3 { background: #27c93f; }
+
+  .console-body {
+    padding: 14px 16px;
+    max-height: 260px;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #8fb4c2;
+  }
+
+  .console-body::-webkit-scrollbar { width: 5px; }
+  .console-body::-webkit-scrollbar-track { background: transparent; }
+  .console-body::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 3px;
+  }
+
+  .line-info    { color: #93c5fd; }
+  .line-success { color: #86efac; }
+  .line-error   { color: #fca5a5; }
+  .line-data    { color: #a8dadc; }
+  .line-dim     { color: #4a4a55; }
+
+  /* ==== FOOTER ==== */
+  .footer {
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    margin-top: 26px;
+    padding-top: 22px;
+    position: relative;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25%;
+    right: 25%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+  }
+
+  .footer b {
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+
+  /* ==== RESPONSIVE ==== */
+  @media (max-width: 520px) {
+    .card {
+      padding: 32px 24px 26px;
+      border-radius: 16px;
+    }
+
+    .card::before,
+    .card::after {
+      width: 28px;
+      height: 28px;
+    }
+
+    h1 { font-size: 24px; letter-spacing: 1px; }
+    .logo-mark { width: 58px; height: 58px; }
+    .logo-mark .diamond { width: 18px; height: 18px; }
+    .section-title { font-size: 17px; }
+    .step-line { width: 24px; }
+    .step-circle { width: 28px; height: 28px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo-mark">
+        <div class="diamond"></div>
+      </div>
+      <h1>Alight Motion Premium</h1>
+      <div class="subtitle">Generator</div>
+      <div class="creator">Created by RIIZZ</div>
+    </div>
+
+    <!-- STEP INDICATOR -->
+    <div class="steps">
+      <div class="step-node">
+        <div class="step-circle active" id="circle1">1</div>
+      </div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-node">
+        <div class="step-circle" id="circle2">2</div>
+      </div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-node">
+        <div class="step-circle" id="circle3">3</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="section show" id="section1">
+      <h2 class="section-title">Kirim Magic Link</h2>
+      <p class="section-desc">Masukkan email kamu untuk menerima magic link verifikasi.</p>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="nama@email.com" autocomplete="email">
+      </div>
+
+      <button class="btn btn-primary" id="btnSend">
+        <span>Kirim Magic Link</span>
+      </button>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section" id="section2">
+      <h2 class="section-title">Verifikasi Akun</h2>
+      <p class="section-desc">Tempel raw magic link dari email kamu di bawah ini.</p>
+
+      <div class="field">
+        <label for="rawLink">Raw Magic Link</label>
+        <textarea id="rawLink" placeholder="https://..."></textarea>
+      </div>
+
+      <button class="btn btn-primary" id="btnVerify">
+        <span>Verifikasi Akun</span>
+      </button>
+      <button class="btn btn-ghost" id="btnBack1">← Ganti Email</button>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section" id="section3">
+      <h2 class="section-title">Aktivasi Premium</h2>
+      <p class="section-desc">Token telah diverifikasi. Klik tombol di bawah untuk mengaktifkan premium.</p>
+
+      <div class="field">
+        <label for="idToken">ID Token</label>
+        <input type="text" id="idToken" placeholder="Menunggu verifikasi..." readonly>
+      </div>
+
+      <button class="btn btn-primary" id="btnPremium">
+        <span>Aktifkan Premium</span>
+      </button>
+    </div>
+
+    <!-- STATUS -->
+    <div class="status" id="status"></div>
+
+    <!-- CONSOLE -->
+    <div class="console">
+      <div class="console-header">
+        <div class="dots">
+          <span class="d1"></span>
+          <span class="d2"></span>
+          <span class="d3"></span>
+        </div>
+        <span>System Log</span>
+      </div>
+      <div class="console-body" id="consoleBody"><span class="line-dim">// Menunggu aktivitas...</span></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      Alight Motion Premium &nbsp;·&nbsp; <b>RIIZZ</b>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/**
+ * ================================================================
+ * NAMA SCRAPE  : Alight Motion Premium Generator
+ * ADMIN UTAMA  : RIIZZ
+ * PENCIPTA     : RIIZZ
+ * USAGE        : Buka di browser (HTML version)
+ * ================================================================
+ */
+
+const API_URL = 'https://anita-studio.netlify.app/.netlify/functions/amprem';
+
+const state = { email: '', rawLink: '', idToken: '' };
+
+const $ = (id) => document.getElementById(id);
+const consoleBody = $('consoleBody');
+const statusBox = $('status');
+
+// ==== CONSOLE LOGGER ====
+let isConsoleEmpty = true;
+
+function appendLog(text, className = 'line-data') {
+  if (isConsoleEmpty) {
+    consoleBody.innerHTML = '';
+    isConsoleEmpty = false;
+  }
+  const line = document.createElement('div');
+  line.className = className;
+  line.textContent = text;
+  consoleBody.appendChild(line);
+  consoleBody.scrollTop = consoleBody.scrollHeight;
+}
+
+const consoleLog = (d) => appendLog(typeof d === 'string' ? d : JSON.stringify(d, null, 2), 'line-data');
+const consoleInfo = (m) => appendLog(m, 'line-info');
+const consoleSuccess = (m) => appendLog(m, 'line-success');
+const consoleError = (m) => appendLog(m, 'line-error');
+const consoleDim = (m) => appendLog(m, 'line-dim');
+
+// ==== UI HELPERS ====
+function showStatus(message, type = 'info') {
+  statusBox.textContent = message;
+  statusBox.className = `status show ${type}`;
+}
+
+function hideStatus() {
+  statusBox.className = 'status';
+}
+
+function setLoading(btn, loading) {
+  if (loading) {
+    btn.disabled = true;
+    btn.dataset.original = btn.innerHTML;
+    btn.innerHTML = `<span class="spinner"></span><span>Memproses...</span>`;
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = btn.dataset.original;
+  }
+}
+
+function setStep(n) {
+  ['circle1', 'circle2', 'circle3'].forEach((id, i) => {
+    const c = $(id);
+    c.classList.remove('active', 'done');
+    if (i + 1 < n) { c.classList.add('done'); c.textContent = '✓'; }
+    else { c.textContent = i + 1; }
+    if (i + 1 === n) c.classList.add('active');
+  });
+
+  ['line1', 'line2'].forEach((id, i) => {
+    $(id).classList.toggle('done', i + 1 < n);
+  });
+}
+
+function showSection(n) {
+  ['section1', 'section2', 'section3'].forEach((id, i) => {
+    $(id).classList.toggle('show', i + 1 === n);
+  });
+  setStep(n);
+}
+
+// ==== CORE POST ====
+async function post(action, data) {
+  consoleInfo(`→ POST ${action}`);
+  consoleDim(`  ${JSON.stringify(data)}`);
+
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action, ...data })
+  });
+
+  const json = await response.json();
+  consoleDim(`  HTTP ${response.status}`);
+  consoleLog(json);
+  return json;
+}
+
+// ==== STEP 1 ====
+$('btnSend').addEventListener('click', async () => {
+  const email = $('email').value.trim();
+
+  if (!email) {
+    showStatus('Email wajib diisi.', 'warn');
+    return;
+  }
+
+  state.email = email;
+  hideStatus();
+  setLoading($('btnSend'), true);
+
+  try {
+    consoleDim('// === STEP 1: send-magiclink ===');
+    const magicLink = await post('send-magiclink', { email });
+
+    if (!magicLink.success) {
+      throw new Error(magicLink.message || 'Gagal mengirim magic link');
+    }
+
+    consoleSuccess('✓ Magic link berhasil dikirim');
+    showStatus('Magic link terkirim. Cek email, lalu tempel raw link di step berikutnya.', 'success');
+
+    setTimeout(() => { showSection(2); hideStatus(); }, 1200);
+  } catch (error) {
+    consoleError(`✗ ${error.message}`);
+    showStatus(error.message, 'error');
+  } finally {
+    setLoading($('btnSend'), false);
+  }
+});
+
+// ==== STEP 2 ====
+$('btnVerify').addEventListener('click', async () => {
+  const rawLink = $('rawLink').value.trim();
+
+  if (!rawLink) {
+    showStatus('Raw magic link wajib diisi.', 'warn');
+    return;
+  }
+
+  state.rawLink = rawLink;
+  hideStatus();
+  setLoading($('btnVerify'), true);
+
+  try {
+    consoleDim('// === STEP 2: verify-account ===');
+    const verification = await post('verify-account', { email: state.email, rawLink });
+
+    if (!verification.success) {
+      throw new Error(verification.message || 'Verifikasi gagal');
+    }
+
+    const idToken = verification.idToken || verification.profile?.idToken;
+    if (!idToken) throw new Error('idToken tidak ditemukan');
+
+    state.idToken = idToken;
+    consoleSuccess('✓ Verifikasi berhasil');
+    showStatus('Verifikasi berhasil. Lanjut ke aktivasi premium.', 'success');
+
+    setTimeout(() => {
+      $('idToken').value = idToken;
+      showSection(3);
+      hideStatus();
+    }, 1200);
+  } catch (error) {
+    consoleError(`✗ ${error.message}`);
+    showStatus(error.message, 'error');
+  } finally {
+    setLoading($('btnVerify'), false);
+  }
+});
+
+$('btnBack1').addEventListener('click', () => {
+  showSection(1);
+  hideStatus();
+});
+
+// ==== STEP 3 ====
+$('btnPremium').addEventListener('click', async () => {
+  if (!state.idToken) {
+    showStatus('idToken tidak tersedia.', 'warn');
+    return;
+  }
+
+  hideStatus();
+  setLoading($('btnPremium'), true);
+
+  try {
+    consoleDim('// === STEP 3: apply-premium ===');
+    const premium = await post('apply-premium', {
+      email: state.email,
+      idToken: state.idToken
+    });
+
+    if (!premium.success) {
+      throw new Error(premium.message || 'Proses gagal');
+    }
+
+    consoleSuccess('✓ Premium berhasil diaktifkan');
+    consoleLog(premium);
+    showStatus('Premium berhasil diaktifkan. Nikmati semua fitur!', 'success');
+
+    setStep(4);
+  } catch (error) {
+    consoleError(`✗ ${error.message}`);
+    showStatus(error.message, 'error');
+  } finally {
+    setLoading($('btnPremium'), false);
+  }
+});
+
+// ==== INIT ====
+consoleDim('// Alight Motion Premium Generator');
+consoleDim('// Admin Utama: RIIZZ | Pencipta: RIIZZ');
+consoleDim('// Sistem siap. Menunggu input...');
+showSection(1);
+</script>
+
+</body>
+</html>
